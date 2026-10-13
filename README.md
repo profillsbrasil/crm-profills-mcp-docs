@@ -20,7 +20,7 @@ Cole este pedido no seu agente, no Claude Code, no claude.ai, no Claude Desktop 
 Instale o CRM da Profills seguindo https://raw.githubusercontent.com/profillsbrasil/crm-profills-mcp-docs/main/INSTALAR.md
 ```
 
-O agente descobre o app, instala o plugin `crm-profills` e pede o seu login no CRM. Você entra com a sua conta e clica em permitir. A senha nunca passa pelo agente. No claude.ai, uma instalação vale também no Claude Desktop e no Claude Code da mesma conta. No Codex, vale no CLI, no app e na IDE da mesma máquina.
+O agente descobre o app, instala o plugin `crm-profills` e pede o seu login no CRM. Você entra com a sua conta e clica em permitir. A senha nunca passa pelo agente. No claude.ai, uma instalação vale também no Claude Desktop e no Claude Code da mesma conta. No Codex, vale na máquina onde foi instalado.
 
 O passo a passo que o agente segue está em [INSTALAR.md](INSTALAR.md). Para testar, peça "Mostre a minha agenda desta semana".
 

@@ -30,7 +30,7 @@ Com uma linha só, siga o estado dela. Com um servidor manual ou um plugin insta
   - Claude Code fora dela, como no `claude -p`: o vendedor roda `claude mcp login "<nome da lista>"` no terminal dele.
   - Codex: o vendedor roda `codex mcp login <nome da lista>`.
   - Máquina sem navegador, como numa sessão SSH: o mesmo comando com `--no-browser` num terminal interativo (`ssh -t`). O vendedor abre a URL impressa no computador dele e cola no terminal a URL para onde o navegador voltou.
-  - Conector do claude.ai: o vendedor clica em **Connect** no conector, em **Customize** e **Connectors**.
+  - claude.ai: o vendedor clica em **Conectar** no CRM Profills, na aba **Conectores** do plugin (em inglês, **Connect** e **Connectors**).
 - **Nenhuma linha.** O CRM não está instalado. Siga [INSTALAR.md](../../INSTALAR.md).
 - **Servidor manual na lista.** Um nome fora da tabela, com a URL do CRM, vem de um `claude mcp add` ou `codex mcp add` antigo. Fica o plugin. Diga ao vendedor que remova o manual com `claude mcp remove <nome>` ou `codex mcp remove <nome>`, e siga o login do plugin.
 - **Plugin instalado duas vezes no Claude Code.** O `claude plugin list` mostra `crm-profills@synced` e `crm-profills@profills-skills`. Fica o da conta, que vale também no claude.ai e no Desktop. Sai o outro com `claude plugin uninstall crm-profills@profills-skills`.

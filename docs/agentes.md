@@ -350,4 +350,4 @@ O app renova o acesso sozinho por até 90 dias. Depois, o vendedor faz o login d
 
 ### Funciona no ChatGPT?
 
-Pelo Codex, sim, inclusive na aba Codex do app do ChatGPT. No chat do ChatGPT, os planos Plus e Pro não gravam por servidor próprio. Os passos estão em [INSTALAR.md](../INSTALAR.md#codex).
+Pelo Codex, sim. No chat do ChatGPT, os planos Plus e Pro não gravam por servidor próprio. Os passos estão em [INSTALAR.md](../INSTALAR.md#codex).

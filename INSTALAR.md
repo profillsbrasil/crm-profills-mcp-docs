@@ -11,7 +11,7 @@ O login no CRM e o clique em permitir são sempre do vendedor. Você não pede a
 | Você está em | Siga |
 |---|---|
 | claude.ai, Claude Desktop ou Claude Code | [Família Claude](#família-claude) |
-| Codex: CLI, aba Codex do app do ChatGPT ou extensão de IDE | [Codex](#codex) |
+| Codex: CLI ou aba Codex do app do ChatGPT | [Codex](#codex) |
 | Chat do ChatGPT | [Chat do ChatGPT](#chat-do-chatgpt) |
 
 Se não souber, rode `command -v claude` e `command -v codex`. Um app de chat sem terminal é o claude.ai, o Claude Desktop ou o ChatGPT.
@@ -26,12 +26,12 @@ Se não souber, rode `command -v claude` e `command -v codex`. Um app de chat se
 
 ## Família Claude
 
-Uma instalação na conta do claude.ai vale no claude.ai, no Claude Desktop e no Claude Code logado com a mesma conta.
+Uma instalação na conta do claude.ai vale no claude.ai, no Claude Desktop e no Claude Code logado com a mesma conta. Plugin na conta existe nos planos Pro, Max, Team e Enterprise. No plano Free, siga [Plano Free](#plano-free).
 
 1. Peça ao vendedor que abra `https://claude.ai/customize/plugins` (no Desktop: **Personalização** e **Plugins**).
 2. Ele clica em **Adicionar**, depois em **Adicionar marketplace**, cola `profillsbrasil/profills-skills` e confirma. Os menus podem estar em inglês: **Customize**, **Plugins**, **Add** e **Add marketplace**.
 3. Na lista, ele clica em **Adicionar** na linha do **Crm profills**.
-4. Ele abre o plugin, vai na aba **Conectores** e olha o **CRM Profills**. Com **Conectado**, está pronto. Senão, ele clica em **Conectar**, entra com a conta do CRM e clica em permitir.
+4. Ele abre o plugin, vai na aba **Conectores** e olha o **CRM Profills**. Com **Conectado**, está pronto. Senão, ele clica em **Conectar**, entra com a conta do CRM e clica em permitir. Nos planos Team e Enterprise, só o Owner adiciona o conector à organização. Se o botão não aparecer para o vendedor, ele pede ao Owner e depois clica em **Conectar**.
 5. No Claude Code, o plugin chega na sessão seguinte como `crm-profills@synced`, ou na sessão aberta com `/reload-plugins`. O Claude Code pede um login próprio: o vendedor digita `/mcp`, escolhe `plugin:crm-profills:crm-profills`, entra no CRM e clica em permitir. Você não faz esse login pelo terminal, porque o comando exige um terminal interativo.
 
 Um aviso pode aparecer no passo 2: "A sincronização automática exige que o Claude GitHub App tenha acesso a este repositório". Ele trata só de receber versões novas do plugin sozinho. O vendedor pode liberar ou ignorar, e a instalação funciona dos dois jeitos.
@@ -44,9 +44,17 @@ claude plugin install crm-profills --marketplace profillsbrasil/profills-skills
 
 Depois, o mesmo login do passo 5.
 
+### Plano Free
+
+O plano Free não tem plugin na conta, mas aceita 1 conector personalizado. Mande ao vendedor este link, que abre o formulário já preenchido:
+
+`https://claude.ai/customize/connectors?modal=add-custom-connector&connectorName=CRM%20Profills&connectorUrl=https%3A%2F%2Fmcp.profills.com%2Fmcp`
+
+Ele confere, clica em adicionar, depois em **Conectar**, entra com a conta do CRM e clica em permitir. O conector aparece também no Claude Desktop e no Claude Code logado com a mesma conta.
+
 ## Codex
 
-A instalação vale no Codex CLI, na aba Codex do app do ChatGPT e na extensão de IDE da mesma máquina, porque os três leem o mesmo `~/.codex`. Você roda os comandos:
+A instalação vale no Codex CLI da máquina. A aba Codex do app do ChatGPT lê o mesmo `~/.codex`, então deve mostrar o plugin depois que o app é fechado e aberto de novo. Você roda os comandos:
 
 ```bash
 codex plugin marketplace add profillsbrasil/profills-skills
@@ -54,13 +62,13 @@ codex plugin add crm-profills@profills-skills
 codex mcp login crm-profills
 ```
 
-O `codex mcp login` imprime uma URL e espera. Mostre a URL ao vendedor. Ele abre a URL no navegador, entra com a conta do CRM e clica em permitir. Sem navegador na máquina, use `codex mcp login --no-browser crm-profills`: o vendedor abre a URL no computador dele e cola no terminal a URL para onde o navegador voltou, que começa com `http://127.0.0.1`.
+O `codex mcp login` imprime uma URL e tenta abrir o navegador. Mostre a URL ao vendedor. Ele entra com a conta do CRM e clica em permitir. Se ele já estiver logado no CRM nesse navegador, o login pode terminar sozinho, com `Successfully logged in`. Sem navegador na máquina, use `codex mcp login --no-browser crm-profills`: o vendedor abre a URL no computador dele e cola no terminal a URL para onde o navegador voltou, que começa com `http://127.0.0.1`.
 
-Os tools do CRM aparecem na sessão seguinte. No app do ChatGPT, feche e abra o app.
+Os tools do CRM aparecem na sessão seguinte. No app do ChatGPT, feche e abra o app. Se a aba Codex não mostrar os tools do CRM, use o Codex CLI.
 
 ## Chat do ChatGPT
 
-Nos planos Plus e Pro, o chat do ChatGPT não grava no CRM por servidor próprio: o Plus não aceita servidor próprio, e o Pro só lê. Diga ao vendedor que use a aba Codex do app do ChatGPT e cole lá este pedido:
+Nos planos Plus e Pro, o chat do ChatGPT não grava no CRM por servidor próprio. A OpenAI libera escrita por servidor próprio só nos planos Business, Enterprise e Edu, e o Pro só lê. Diga ao vendedor que use o Codex, no terminal ou na aba Codex do app do ChatGPT, e cole lá este pedido:
 
 > Instale o CRM da Profills seguindo https://raw.githubusercontent.com/profillsbrasil/crm-profills-mcp-docs/main/INSTALAR.md
 
