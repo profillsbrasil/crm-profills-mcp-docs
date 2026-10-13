@@ -128,10 +128,6 @@ O mesmo número pode existir em mais de um ano. Com o ano, como `72/26`, o CRM a
 
 O app renova o acesso sozinho por até 90 dias. Depois, conecte de novo. Os prazos estão em [Como o login funciona](instalacao.md#como-o-login-funciona).
 
-### Funciona no Codex?
+### Funciona no ChatGPT?
 
-Provavelmente, mas ninguém conectou o Codex ainda. O CRM precisa pôr o Codex na lista de apps aceitos. Antes disso, o login para numa página com "Não foi possível conectar". Os passos estão em [Codex](instalacao.md#codex).
-
-### Funciona no Cursor?
-
-Não hoje. Veja [Cursor](instalacao.md#cursor-não-funciona-hoje).
+O CRM aceita o login do Codex e do app do ChatGPT. Os passos estão em [ChatGPT](instalacao.md#chatgpt).

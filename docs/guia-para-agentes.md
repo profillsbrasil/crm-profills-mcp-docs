@@ -32,9 +32,9 @@ Descubra qual app o vendedor usa e siga a linha dele:
 |---|---|
 | Claude Code | Siga [No Claude Code](#no-claude-code) |
 | Codex | Siga [No Codex](#no-codex) |
-| claude.ai ou Claude Desktop | Guie o vendedor pelos passos de [Claude.ai e Claude Desktop](instalacao.md#claudeai-e-claude-desktop). A configuração é só pela tela, e você não clica por ele |
-| ChatGPT | Guie o vendedor pelos passos de [ChatGPT](instalacao.md#chatgpt-não-testado). Avise que ninguém testou essa conexão ainda e peça que ele conte o resultado |
-| Cursor ou outro app | Não configure. Diga ao vendedor que o CRM recusa o login desse app, como em [Situação por app](instalacao.md#situação-por-app) |
+| claude.ai ou Claude Desktop | Guie o vendedor pelos passos de [No claude.ai ou no Claude Desktop](instalacao.md#no-claudeai-ou-no-claude-desktop). A configuração é só pela tela, e você não clica por ele |
+| App do ChatGPT | Guie o vendedor pelos passos de [No app do ChatGPT](instalacao.md#no-app-do-chatgpt). Se o login falhar, peça que ele avise o administrador do CRM |
+| Outro app | Não configure. Diga ao vendedor que o CRM só aceita o login do Claude e do ChatGPT |
 
 Em todos os apps, o vendedor faz o login no CRM e clica em permitir. Você não faz esse passo e não pede a senha dele. A configuração está pronta quando `minha_agenda` devolve dados do CRM.
 
@@ -53,12 +53,10 @@ Em todos os apps, o vendedor faz o login no CRM e clica em permitir. Você não 
 
 ### No Codex
 
-O login do Codex foi testado em 13/10/2026 e funcionou. Se o login parar numa página do CRM com "Não foi possível conectar", o CRM não aceitou o app: avise o vendedor e pare.
-
 1. Rode os dois `curl` de [Confira se o servidor responde](instalacao.md#confira-se-o-servidor-responde). Se um deles falhar, pare e avise o vendedor.
 2. Rode `codex mcp list`. Se `crm-profills` aparece com a URL `https://mcp.profills.com/mcp` e sem `Not logged in`, pule para o passo 5. Se aparece com `Not logged in`, peça ao vendedor que rode `codex mcp login crm-profills` e siga no passo 4. Se aparece com outra URL, rode `codex mcp remove crm-profills`.
-3. Peça ao vendedor que rode no terminal dele `codex mcp add crm-profills --url https://mcp.profills.com/mcp`. Não rode esse comando você mesmo. O `add` abre o login e só termina quando o navegador volta, então ele trava numa sessão sem terminal interativo. Numa máquina sem navegador, o `add` imprime a URL de login e fica esperando. O vendedor interrompe com Ctrl+C, porque o servidor já ficou gravado, e roda `codex mcp login --no-browser crm-profills` como em [Codex](instalacao.md#codex).
-4. Peça ao vendedor que faça o login no CRM e clique em permitir. A tela de consentimento deve mostrar o aviso de app que roda no computador dele, como no Claude Code.
+3. Peça ao vendedor que rode no terminal dele `codex mcp add crm-profills --url https://mcp.profills.com/mcp`. Não rode esse comando você mesmo. O `add` abre o login e só termina quando o navegador volta, então ele trava numa sessão sem terminal interativo. Numa máquina sem navegador, o `add` imprime a URL de login e fica esperando. O vendedor interrompe com Ctrl+C, porque o servidor já ficou gravado, e roda `codex mcp login --no-browser crm-profills` como em [No Codex](instalacao.md#no-codex).
+4. Peça ao vendedor que faça o login no CRM e clique em permitir. A tela de consentimento pode mostrar o aviso de app que roda no computador dele, como no Claude Code.
 5. Confira a conexão como em [Confira a conexão](#confira-a-conexão). Se os tools do CRM não aparecem na sua sessão, peça ao vendedor que abra uma sessão nova.
 
 ## Qual tool chamar
