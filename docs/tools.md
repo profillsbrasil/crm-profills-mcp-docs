@@ -273,7 +273,7 @@ Cada métrica de `metricas` traz `atual`, `anterior` e `variacao_pct`. `projecao
 
 O agente move a proposta em dois pontos. O resto acontece na tela do CRM.
 
-<img src="img/ciclo-da-proposta.svg" alt="rascunho vai para aguardando_aprovacao pelo agente ou pela tela; na tela, o admin aprova ou rejeita; aprovada vai para enviada pelo agente ou pela tela; na tela, o retorno do cliente leva a cliente_aceitou ou cliente_rejeitou" width="100%">
+<img src="img/ciclo-da-proposta.svg" alt="rascunho vai para aguardando_aprovacao pelo agente ou pela tela; na tela, o admin ou o admin_tp aprova ou rejeita; aprovada vai para enviada pelo agente ou pela tela; na tela, o retorno do cliente leva a cliente_aceitou ou cliente_rejeitou" width="100%">
 
 - `enviar_proposta` com `destino` igual a `aguardando_aprovacao` põe a proposta na fila de Aprovações dos Avisos. O CRM não manda e-mail nem notificação. O admin aprova ou rejeita pela tela, e o admin_tp faz o mesmo nos clientes do tier TP.
 - `enviar_proposta` com `destino` igual a `enviada` só grava a data de envio. O vendedor manda o PDF ao cliente por fora. O PDF gerado com a proposta em `aprovada` sai com marca de rascunho. Depois do envio, o `link` da resposta abre a proposta na tela, e o PDF sai sem a marca.
