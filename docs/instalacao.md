@@ -88,7 +88,7 @@ Os comandos abaixo foram conferidos na [documentação de MCP do Claude Code](ht
 
    O nome `crm-profills` é uma escolha desta documentação. O escopo `user` grava o servidor em `~/.claude.json` e deixa o CRM disponível em qualquer pasta. Para usar só no projeto atual, troque por `--scope local`, o padrão. O escopo `project` grava `.mcp.json` na raiz do projeto e pede aprovação na sessão antes de conectar.
 
-   Depois do `add`, `claude mcp list` mostra o servidor como `! Needs authentication`. O login ainda não aconteceu.
+   Depois do `add`, `claude mcp list` mostra o servidor como `! Needs authentication`. O login ainda não aconteceu. `claude mcp get crm-profills` mostra a URL gravada.
 
 3. Faça o login. Dentro do Claude Code, digite `/mcp`, escolha `crm-profills` e siga o navegador. No terminal, o comando equivalente é este:
 
