@@ -22,11 +22,11 @@ São 18 tools: 9 que leem, 3 que criam e 6 que alteram. A lista vem nessa ordem 
 
 O tipo sai das anotações MCP do tool:
 
-| Tipo | `readOnlyHint` | `destructiveHint` | `idempotentHint` |
-|---|---|---|---|
-| lê | `true` | `false` | `true` |
-| cria | `false` | `false` | `false` |
-| altera | `false` | `true` | `true` |
+| Tipo | `readOnlyHint` | `destructiveHint` | `idempotentHint` | `openWorldHint` |
+|---|---|---|---|---|
+| lê | `true` | `false` | `true` | `false` |
+| cria | `false` | `false` | `false` | `false` |
+| altera | `false` | `true` | `true` | `false` |
 
 | Tool | Tipo | O que faz |
 |---|---|---|

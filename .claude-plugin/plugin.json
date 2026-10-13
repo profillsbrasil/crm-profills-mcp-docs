@@ -1,7 +1,7 @@
 {
   "name": "crm-profills",
   "version": "1.0.0",
-  "description": "Liga o CRM da Profills ao Claude Code: o servidor MCP com os tools do CRM e a skill que confere a conexão.",
+  "description": "Liga o CRM da Profills ao Claude Code e ao Codex: o servidor MCP com os tools do CRM e a skill que confere a conexão.",
   "author": {
     "name": "Profills",
     "email": "dev@profills.com"

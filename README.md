@@ -33,15 +33,6 @@ Depois digite `/mcp` e faça o login.
 No app (claude.ai ou Claude Desktop): **Customize**, **Connectors** e **Add custom connector** com o endereço.
 
 <details>
-<summary>Passo a passo: conector do claude.ai no Claude Code</summary>
-
-1. Rode `claude mcp list`.
-2. Procure a linha `claude.ai CRM Profills: https://mcp.profills.com/mcp - ✔ Connected`. O nome depois de `claude.ai` é o que você deu ao conector.
-3. Com essa linha, o CRM já funciona no Claude Code. Não instale o plugin nem rode `claude mcp add`, porque o conector já é o servidor do CRM no Claude Code.
-
-</details>
-
-<details>
 <summary>Passo a passo: plugin no Claude Code</summary>
 
 1. Rode `claude mcp list`. Se o CRM já aparece, com qualquer nome e a URL `https://mcp.profills.com/mcp`, não instale de novo. Com `! Needs authentication`, falta só o login. Pule para o passo 4.
@@ -120,7 +111,7 @@ No app: **Developer mode** e **Create app** com o endereço.
 
    O servidor aparece como `crm-profills` no `codex mcp list`, com `Not logged in`.
 
-4. Faça o login com `codex mcp login crm-profills`. Entre com a sua conta do CRM e clique em permitir. A tela de consentimento pode mostrar o aviso de app que roda no seu computador, como no Claude Code. O terminal mostra `Successfully logged in.`.
+4. Faça o login com `codex mcp login crm-profills`. Entre com a sua conta do CRM e clique em permitir. A tela de consentimento pode mostrar o aviso de app que roda no seu computador, como no Claude Code.
 
    Sem navegador na máquina, use `codex mcp login --no-browser crm-profills`, abra a URL impressa no seu computador, faça o login e cole no terminal a URL inteira da barra de endereço, que começa com `http://127.0.0.1`.
 
