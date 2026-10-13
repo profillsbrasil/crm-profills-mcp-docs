@@ -31,7 +31,7 @@ O endereço do conector é `https://mcp.profills.com/mcp`. O vendedor faz o logi
 |---|---|---|
 | Claude (claude.ai e Claude Desktop) | Funciona | **Customize**, **Connectors** e **Add custom connector** com a URL acima. [Passo a passo](docs/instalacao.md#claudeai-e-claude-desktop) |
 | Claude Code | Funciona | `claude mcp add --transport http --scope user crm-profills https://mcp.profills.com/mcp` e depois `/mcp`. [Passo a passo](docs/instalacao.md#claude-code) |
-| Codex | Provável, ainda não testado. Só conecta depois que o CRM puser o Codex na lista de apps aceitos | `codex mcp add crm-profills --url https://mcp.profills.com/mcp`, que já abre o login. [Passo a passo](docs/instalacao.md#codex) |
+| Codex | Funciona (login testado em 13/10/2026) | `codex mcp add crm-profills --url https://mcp.profills.com/mcp`, que já abre o login. [Passo a passo](docs/instalacao.md#codex) |
 | ChatGPT | Provável, ainda não testado | Developer mode e **Create app** com a URL acima. [Passo a passo](docs/instalacao.md#chatgpt-não-testado) |
 | Cursor | Não funciona hoje | O Cursor não está na lista de apps aceitos do CRM. [Detalhes](docs/instalacao.md#cursor-não-funciona-hoje) |
 

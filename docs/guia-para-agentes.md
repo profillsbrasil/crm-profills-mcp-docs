@@ -53,7 +53,7 @@ Em todos os apps, o vendedor faz o login no CRM e clica em permitir. Você não 
 
 ### No Codex
 
-Ninguém conectou o Codex ainda. Avise o vendedor e peça que ele conte o resultado. O Codex só conecta depois que o CRM põe o Codex na lista de apps aceitos. Antes disso, o login para numa página do CRM com "Não foi possível conectar". Se o vendedor vir essa página, avise que o CRM ainda não aceita o Codex e pare.
+O login do Codex foi testado em 13/10/2026 e funcionou. Se o login parar numa página do CRM com "Não foi possível conectar", o CRM não aceitou o app: avise o vendedor e pare.
 
 1. Rode os dois `curl` de [Confira se o servidor responde](instalacao.md#confira-se-o-servidor-responde). Se um deles falhar, pare e avise o vendedor.
 2. Rode `codex mcp list`. Se `crm-profills` aparece com a URL `https://mcp.profills.com/mcp` e sem `Not logged in`, pule para o passo 5. Se aparece com `Not logged in`, peça ao vendedor que rode `codex mcp login crm-profills` e siga no passo 4. Se aparece com outra URL, rode `codex mcp remove crm-profills`.
