@@ -23,7 +23,7 @@ O CRM só aceita o login dos apps de uma lista fixa. Cada app se identifica por 
 |---|---|---|
 | Claude (claude.ai e Claude Desktop) | `https://claude.ai/oauth/mcp-oauth-client-metadata` | Funciona |
 | Claude Code | `https://claude.ai/oauth/claude-code-client-metadata` | Funciona |
-| Codex | `https://chatgpt.com/oauth/codex/client.json` | Provável, ainda não testado. Só conecta depois que o CRM puser o Codex na lista |
+| Codex | `https://chatgpt.com/oauth/codex/client.json` | Funciona (login testado em 13/10/2026) |
 | ChatGPT | `https://chatgpt.com/oauth/client.json` | Provável, ainda não testado |
 | Cursor | nenhum | Não funciona hoje |
 
@@ -110,7 +110,7 @@ No modo não interativo (`claude -p`), o Claude Code não faz o login. Faça o l
 
 ## Codex
 
-Ninguém conectou o Codex ainda. O Codex só conecta depois que o CRM põe o endereço `https://chatgpt.com/oauth/codex/client.json` na lista de apps aceitos. Antes disso, o login para numa página do CRM com "Não foi possível conectar". Os comandos abaixo foram conferidos no `codex mcp --help` da versão 0.162.1.
+O login do Codex foi testado em 13/10/2026 e funcionou. Uma chamada de tool pelo Codex ainda não foi conferida. Se o login parar numa página do CRM com "Não foi possível conectar", o CRM não aceitou o app. Os comandos abaixo foram conferidos no `codex mcp --help` da versão 0.162.1.
 
 1. Veja se o servidor já está configurado:
 
@@ -126,9 +126,9 @@ Ninguém conectou o Codex ainda. O Codex só conecta depois que o CRM põe o end
    codex mcp add crm-profills --url https://mcp.profills.com/mcp
    ```
 
-   O `add` grava o servidor em `~/.codex/config.toml` e já abre o login no navegador. O comando fica parado até o login terminar. Rode o `add` num terminal interativo. Se o login terminar aqui, pule para o passo 4.
+   O `add` grava o servidor em `~/.codex/config.toml`, imprime a URL de login e já abre o login no navegador. O comando fica parado até o login terminar. Rode o `add` num terminal interativo. No fim, o terminal mostra `Successfully logged in.`. Se o login terminar aqui, pule para o passo 4.
 
-   Sem navegador na máquina, como numa sessão SSH, o `add` fica parado sem mostrar nada. Interrompa com Ctrl+C. O servidor já ficou gravado, e o login segue no passo 3.
+   Sem navegador na máquina, como numa sessão SSH, o `add` imprime a URL de login e fica esperando. Interrompa com Ctrl+C. O servidor já ficou gravado, e o login segue no passo 3.
 
 3. Faça o login, se o `add` não fez:
 
