@@ -2,44 +2,53 @@
 
 ![Fichas de cliente, proposta, agenda e gráfico ligadas a um núcleo central](docs/img/capa.png)
 
-Este conector MCP liga o app de IA do vendedor ao CRM da Profills. MCP é o protocolo que o Claude, o Codex e outros apps usam para chamar serviços de fora. O conector só serve a quem tem conta ativa no CRM da Profills.
-
-Com ele, o agente busca clientes, lê propostas, agenda e o placar de Desempenho, registra atendimentos, compromissos e contatos, manda propostas para aprovação e marca propostas como enviadas. Tudo acontece em nome do vendedor que fez login, com as mesmas permissões que ele tem na tela do CRM.
+O conector liga o seu app de IA ao CRM da Profills. O agente busca clientes, lê propostas, agenda e o Desempenho, e registra atendimentos, compromissos e contatos em seu nome, com as mesmas permissões da sua tela. Ele também manda propostas para aprovação e marca propostas como enviadas. O conector só serve a quem tem conta ativa no CRM.
 
 **Agente: comece por [docs/guia-para-agentes.md](docs/guia-para-agentes.md).**
 
 ## Como o pedido chega ao CRM
 
-O conector nunca abre o banco do CRM. Cada tool repassa o pedido ao CRM, que aplica as mesmas regras de ver e de editar da tela.
-```mermaid
-flowchart LR
-    app["App de IA do vendedor"]
-    mcp["Conector<br/>mcp.profills.com/mcp"]
-    crm["CRM da Profills"]
-    app -->|"token OAuth do vendedor"| mcp
-    mcp -->|"pedido em nome do vendedor"| crm
-    crm -->|"só o que o vendedor vê na tela"| mcp
-```
-
-Cada escrita grava no histórico do cliente com a origem `agente` e um selo com o app, como "via Claude" ou "via Claude Code".
+<img src="docs/img/caminho.svg" alt="O app de IA manda o pedido com o login do vendedor ao conector, que pede ao CRM em nome dele. O CRM devolve só o que o vendedor vê na tela." width="100%">
 
 ## Instalar
 
-O endereço do conector é `https://mcp.profills.com/mcp`. O vendedor faz o login no CRM e clica em permitir. A senha nunca passa pelo agente.
+Endereço: `https://mcp.profills.com/mcp`. Você faz o login no CRM e clica em permitir. A senha nunca passa pelo agente.
 
-| App | Situação | Como conectar |
-|---|---|---|
-| Claude (claude.ai e Claude Desktop) | Funciona | **Customize**, **Connectors** e **Add custom connector** com a URL acima. [Passo a passo](docs/instalacao.md#claudeai-e-claude-desktop) |
-| Claude Code | Funciona | `claude mcp add --transport http --scope user crm-profills https://mcp.profills.com/mcp` e depois `/mcp`. [Passo a passo](docs/instalacao.md#claude-code) |
-| Codex | Funciona (login testado em 13/10/2026) | `codex mcp add crm-profills --url https://mcp.profills.com/mcp`, que já abre o login. [Passo a passo](docs/instalacao.md#codex) |
-| ChatGPT | Provável, ainda não testado | Developer mode e **Create app** com a URL acima. [Passo a passo](docs/instalacao.md#chatgpt-não-testado) |
-| Cursor | Não funciona hoje | O Cursor não está na lista de apps aceitos do CRM. [Detalhes](docs/instalacao.md#cursor-não-funciona-hoje) |
+<details open>
+<summary><strong>Claude</strong></summary>
 
-Para testar, peça ao agente "Mostre a minha agenda desta semana". A conexão funciona quando a resposta traz compromissos ou diz que a agenda está vazia.
+No app (claude.ai ou Claude Desktop): **Customize**, **Connectors** e **Add custom connector** com o endereço.
+
+No terminal (Claude Code):
+
+```bash
+claude mcp add --transport http --scope user crm-profills https://mcp.profills.com/mcp
+```
+
+Depois digite `/mcp` e faça o login.
+
+</details>
+
+<details>
+<summary><strong>ChatGPT</strong></summary>
+
+No terminal (Codex):
+
+```bash
+codex mcp add crm-profills --url https://mcp.profills.com/mcp
+```
+
+O comando já abre o login.
+
+No app: **Developer mode** e **Create app** com o endereço.
+
+</details>
+
+Teste pedindo "Mostre a minha agenda desta semana". A conexão funciona quando a resposta traz compromissos ou diz que a agenda está vazia. O [passo a passo](docs/instalacao.md) cobre cada tela e o login sem navegador.
 
 ## Documentação
 
-- [Instalação](docs/instalacao.md): o passo a passo por app, o login e o que não funciona.
+- [Instalação](docs/instalacao.md): o passo a passo no Claude e no ChatGPT e como o login funciona.
 - [Guia para agentes](docs/guia-para-agentes.md): o que o agente faz em ordem, regras de segurança, paginação, datas e erros.
 - [Tools](docs/tools.md): os 18 tools, os parâmetros, o ciclo da proposta e os prompts.
 - [Exemplos](docs/exemplos.md): pedidos do vendedor com a sequência de tools e as perguntas frequentes.

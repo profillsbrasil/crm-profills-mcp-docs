@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 330" width="1000" height="330" role="img" aria-labelledby="t d">
+  <title id="t">Ciclo da proposta</title>
+  <desc id="d">rascunho vai para aguardando_aprovacao pelo agente ou pela tela. Na tela, o admin aprova (aprovada) ou rejeita (rejeitada). aprovada vai para enviada pelo agente ou pela tela. Na tela, o retorno do cliente leva a cliente_aceitou ou cliente_rejeitou.</desc>
+  <defs>
+    <marker id="o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 9 5 1 9" fill="none" stroke="#C9733A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <marker id="t2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 9 5 1 9" fill="none" stroke="#0E4F5C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+  </defs>
+  <rect width="1000" height="330" rx="22" fill="#F2EADB"/>
+  <g font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace" font-size="15" text-anchor="middle">
+    <g fill="#FFF8EE" stroke="#0E4F5C" stroke-opacity=".35" stroke-width="1.5">
+      <rect x="24" y="78" width="120" height="44" rx="22"/>
+      <rect x="208" y="78" width="214" height="44" rx="22"/>
+      <rect x="486" y="78" width="112" height="44" rx="22"/>
+      <rect x="255" y="208" width="120" height="44" rx="22"/>
+      <rect x="820" y="38" width="166" height="44" rx="22"/>
+      <rect x="820" y="138" width="166" height="44" rx="22"/>
+    </g>
+    <rect x="662" y="78" width="104" height="44" rx="22" fill="#0E4F5C"/>
+    <g fill="#12323A">
+      <text x="84" y="105">rascunho</text>
+      <text x="315" y="105">aguardando_aprovacao</text>
+      <text x="542" y="105">aprovada</text>
+      <text x="315" y="235">rejeitada</text>
+      <text x="903" y="65">cliente_aceitou</text>
+      <text x="903" y="165">cliente_rejeitou</text>
+    </g>
+    <text x="714" y="105" fill="#FFF8EE">enviada</text>
+  </g>
+  <g fill="none" stroke-width="2.4" stroke-linecap="round">
+    <path d="M150 100H200" stroke="#C9733A" marker-end="url(#o)"/>
+    <path d="M604 100H654" stroke="#C9733A" marker-end="url(#o)"/>
+    <path d="M428 100H478" stroke="#0E4F5C" marker-end="url(#t2)"/>
+    <path d="M315 128V200" stroke="#0E4F5C" marker-end="url(#t2)"/>
+    <path d="M772 92C796 92 796 60 812 60" stroke="#0E4F5C" marker-end="url(#t2)"/>
+    <path d="M772 108C796 108 796 160 812 160" stroke="#0E4F5C" marker-end="url(#t2)"/>
+  </g>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="14" font-weight="600" text-anchor="middle">
+    <text x="175" y="88" fill="#A85A26">agente</text>
+    <text x="629" y="88" fill="#A85A26">agente</text>
+    <text x="453" y="88" fill="#0E4F5C">aprova</text>
+    <text x="330" y="170" fill="#0E4F5C" text-anchor="start">rejeita</text>
+    <text x="903" y="118" fill="#0E4F5C">retorno do cliente</text>
+  </g>
+  <line x1="24" y1="278" x2="976" y2="278" stroke="#0E4F5C" stroke-opacity=".12"/>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="14" fill="#3D5C62">
+    <path d="M40 304H76" stroke="#C9733A" stroke-width="2.4" stroke-linecap="round"/>
+    <text x="88" y="309">o agente move com enviar_proposta (a tela também move)</text>
+    <path d="M520 304H556" stroke="#0E4F5C" stroke-width="2.4" stroke-linecap="round"/>
+    <text x="568" y="309">só na tela do CRM, pelo admin ou pelo vendedor</text>
+  </g>
+</svg>
