@@ -128,7 +128,7 @@ O login do Codex foi testado em 13/10/2026 e funcionou. Uma chamada de tool pelo
 
    O `add` grava o servidor em `~/.codex/config.toml`, imprime a URL de login e já abre o login no navegador. O comando fica parado até o login terminar. Rode o `add` num terminal interativo. No fim, o terminal mostra `Successfully logged in.`. Se o login terminar aqui, pule para o passo 4.
 
-   Sem navegador na máquina, como numa sessão SSH, o `add` fica parado sem mostrar nada. Interrompa com Ctrl+C. O servidor já ficou gravado, e o login segue no passo 3.
+   Sem navegador na máquina, como numa sessão SSH, o `add` imprime a URL de login e fica esperando. Interrompa com Ctrl+C. O servidor já ficou gravado, e o login segue no passo 3.
 
 3. Faça o login, se o `add` não fez:
 
