@@ -5,8 +5,8 @@ Cada exemplo mostra o pedido do vendedor e a sequência de tools que o agente ch
 - [Exemplos de uso](#exemplos-de-uso)
   1. [Como está a Silva Embalagens?](#1-como-está-a-silva-embalagens)
   2. [Liguei para um telefone e ficou algo combinado](#2-liguei-agora-para-o-41-99876-5432-ficaram-de-mandar-o-pedido-semana-que-vem)
-  3. [Marca uma visita](#3-marca-uma-visita-na-silva-embalagens-quinta-1610-às-14h)
-  4. [Muda a visita de horário](#4-muda-a-visita-de-quinta-para-as-16h)
+  3. [Marca uma visita](#3-marca-uma-visita-na-silva-embalagens-sexta-1610-às-14h)
+  4. [Muda a visita de horário](#4-muda-a-visita-de-sexta-para-as-16h)
   5. [Manda a 72/26 para aprovação](#5-manda-a-7226-para-aprovação)
   6. [Propostas para vencer](#6-quais-propostas-minhas-estão-para-vencer)
   7. [Carteira sem visita há 90 dias](#7-quem-da-minha-carteira-em-curitiba-está-sem-visita-há-90-dias)
@@ -24,7 +24,7 @@ Cada exemplo mostra o pedido do vendedor e a sequência de tools que o agente ch
 3. `ver_cliente` com o `cliente_id` escolhido.
 4. Para cada proposta em `cliente_aceitou`, `ver_proposta` com o `proposta_id` dela, para ler `forma_escolhida.valor_final`.
 
-O agente resume dono, contatos, último atendimento, propostas ativas e próximos compromissos. No Claude Code, o mesmo pedido sai com o prompt `resumo_do_cliente`.
+O agente resume dono, contatos, último atendimento, propostas ativas e próximos compromissos. O vendedor também pode pedir isso pelo prompt `resumo_do_cliente`. No Claude Code, o prompt recebe uma palavra só, então ele usa o CNPJ ou uma palavra do nome, como em [Prompts](tools.md#prompts).
 
 ### 2. "Liguei agora para o 41 99876-5432, ficaram de mandar o pedido semana que vem"
 
@@ -34,14 +34,14 @@ O agente resume dono, contatos, último atendimento, propostas ativas e próximo
 
 O agente diz em qual cliente registrou.
 
-### 3. "Marca uma visita na Silva Embalagens quinta, 16/10, às 14h"
+### 3. "Marca uma visita na Silva Embalagens sexta, 16/10, às 14h"
 
 1. `buscar_clientes` com `q` igual a `Silva Embalagens`.
 2. `criar_compromisso` com `titulo` igual a `Visita Silva Embalagens`, `inicio` igual a `16/10/2026 14:00` e `cliente_id`.
 
-Sem `fim`, o compromisso dura 1 hora, e o agente avisa o vendedor.
+Sem `fim`, o compromisso dura 1 hora, e o agente avisa o vendedor. Se o dia da semana e a data não batem, o agente pergunta ao vendedor antes de criar.
 
-### 4. "Muda a visita de quinta para as 16h"
+### 4. "Muda a visita de sexta para as 16h"
 
 1. `minha_agenda` com `de` e `ate` iguais a `16/10/2026`.
 2. `editar_compromisso` com o `compromisso_id` e `inicio` igual a `16/10/2026 16:00`.
@@ -130,7 +130,7 @@ O app renova o acesso sozinho por até 90 dias. Depois, conecte de novo. Os praz
 
 ### Funciona no Codex?
 
-Sim, depois da liberação do Codex no CRM. Antes dela, o login para numa página com "Não foi possível conectar". Os passos estão em [Codex](instalacao.md#codex).
+Provavelmente, mas ninguém conectou o Codex ainda. O CRM precisa pôr o Codex na lista de apps aceitos. Antes disso, o login para numa página com "Não foi possível conectar". Os passos estão em [Codex](instalacao.md#codex).
 
 ### Funciona no Cursor?
 

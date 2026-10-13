@@ -10,11 +10,11 @@ Esta página é a referência dos 18 tools e dos 2 prompts do servidor. Para sab
 
 ## Tipos de tool
 
-São 18 tools: 9 de leitura, 3 que criam registro e 6 que alteram. O tipo vem nas anotações de cada tool:
+São 18 tools: 9 de leitura, 3 que criam registro e 6 que alteram. O tipo vem nas anotações MCP de cada tool (`readOnlyHint`, `destructiveHint` e `idempotentHint`):
 
-- `leitura` só lê. Repetir não muda nada.
-- `criar` grava um registro novo. Repetir grava outro.
-- `alterar` edita, exclui ou envia. O tool traz a anotação `destructive_hint`. Repetir o mesmo pedido não muda mais nada no CRM, mas a resposta muda. Uma edição repetida com os mesmos valores devolve o registro igual. Uma exclusão repetida volta "não encontrado", porque o registro já saiu. Um envio repetido volta "Nada foi gravado por este pedido: a proposta já está em ...".
+- `leitura` só lê. Traz `readOnlyHint: true`. Repetir não muda nada.
+- `criar` grava um registro novo. Traz `readOnlyHint: false` e `idempotentHint: false`. Repetir grava outro.
+- `alterar` edita, exclui ou envia. Traz `destructiveHint: true` e `idempotentHint: true`. Repetir o mesmo pedido não muda mais nada no CRM, mas a resposta muda. Uma edição repetida com os mesmos valores devolve o registro igual. Uma exclusão repetida volta "não encontrado", porque o registro já saiu. Um envio repetido volta "Nada foi gravado por este pedido: a proposta já está em ...".
 
 ## Tools por área
 
@@ -125,7 +125,7 @@ Cada item traz `prazo_retorno`, o dia em que vencem os 30 dias do envio. Ele só
 | `uf` | | 2 letras, como `PR` |
 | `cursor`, `limite` | | Paginação por `proximo_cursor` |
 
-Com `ultimo_atendimento_aproximado: true`, a data é anterior a 03/07/2026 e o CRM só garante que o atendimento foi nesse dia ou antes. Diga ao vendedor "em tal dia ou antes".
+Com `ultimo_atendimento_aproximado: true`, a data é antiga e o CRM só garante que o atendimento foi nesse dia ou antes. Diga ao vendedor "em tal dia ou antes".
 
 A carteira mede atendimento, não visita. `ultimo_atendimento_em` é o último atendimento registrado no cliente, de qualquer autor. Um compromisso de visita na agenda não conta. Quando o vendedor pergunta por "visita", diga que a lista é de clientes sem atendimento registrado.
 
@@ -265,7 +265,7 @@ Siga esta ordem:
 |---|---|---|
 | `modo` | | `mes` (padrão) ou `semana` |
 | `data` | | Qualquer dia do período. Padrão: hoje. Há dados desde a semana de 06/07/2026 e o mês de julho de 2026 |
-| `escopo` | | `empresa` ou o nome de uma praça. Só vale um dos `escopos_disponiveis` do vendedor, que vêm na resposta. Padrão: `empresa` para quem vê todas as praças, senão a praça do vendedor |
+| `escopo` | | `empresa` ou o identificador de uma praça, escrito como vem em `escopos_disponiveis`. Só vale um dos `escopos_disponiveis` do vendedor, que vêm na resposta. Padrão: `empresa` para quem vê todas as praças, senão a praça do vendedor |
 
 Cada métrica de `metricas` traz `atual`, `anterior` e `variacao_pct`. `projecao` só vem no mês em curso. Repita ao vendedor os `avisos` da resposta.
 
@@ -286,7 +286,7 @@ flowchart LR
 - `enviar_proposta` com `destino` igual a `aguardando_aprovacao` põe a proposta na fila de Aprovações dos Avisos. O CRM não manda e-mail nem notificação. O admin aprova ou rejeita pela tela, e o admin_tp faz o mesmo nos clientes do tier TP.
 - `enviar_proposta` com `destino` igual a `enviada` só grava a data de envio. O vendedor manda o PDF ao cliente por fora. O PDF gerado com a proposta em `aprovada` sai com marca de rascunho. Depois do envio, o `link` da resposta abre a proposta na tela, e o PDF sai sem a marca.
 - A data de envio começa um prazo de 30 dias. Se o prazo vence sem o retorno do cliente registrado na tela, o CRM bloqueia proposta nova do vendedor responsável para esse cliente.
-- Podem enviar o responsável pela proposta, o admin, o admin_tp nos clientes do tier TP e o dono do cliente quando o responsável está inativo. Se o vendedor não puder enviar, o tool responde com o erro de permissão.
+- Podem enviar o responsável pela proposta, o admin, o admin_tp nos clientes do tier TP e o dono do cliente quando o responsável está inativo. Essa lista vem da regra de proposta do CRM e não foi conferida no envio. Se o vendedor não puder enviar, o tool responde com o erro de permissão.
 
 ## Prompts
 

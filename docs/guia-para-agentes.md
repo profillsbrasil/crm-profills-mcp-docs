@@ -19,8 +19,8 @@ Chame `minha_agenda` sem parâmetros. Ela devolve os compromissos do vendedor de
 | Lista de compromissos ou lista vazia | Conexão funcionando | Siga com o pedido do vendedor |
 | "Sessão sem usuário do CRM. Reconecte o conector." | O login não traz um vendedor válido | Peça ao vendedor que conecte de novo |
 | "Seu usuário não tem acesso ao CRM agora." | A conta do vendedor está sem acesso ao CRM | Avise o vendedor e pare |
-| Mensagem com "Avise o administrador." | O servidor não conseguiu falar com o CRM | Avise o vendedor que o administrador precisa olhar |
-| `claude mcp list` mostra `! Needs authentication`, `codex mcp list` mostra `Not logged in`, ou os tools do CRM somem da sessão | Falta o login, ou a conexão venceu | Peça ao vendedor que refaça o login como em [Configure o conector](#configure-o-conector) |
+| Mensagem com "Avise o administrador." | O CRM recusou ou falhou o pedido por um motivo que só o administrador resolve | Avise o vendedor que o administrador precisa olhar |
+| `claude mcp list` mostra `! Needs authentication`, `codex mcp list` mostra `Not logged in`, ou os tools do CRM somem da sessão | Falta o login, ou a conexão venceu | Refaça só o login, sem adicionar o servidor de novo. No Claude Code, siga a partir do passo 4 de [No Claude Code](#no-claude-code). No Codex, peça ao vendedor que rode `codex mcp login crm-profills`. No claude.ai, peça que ele clique em **Connect** no conector, em **Customize** e **Connectors** |
 
 No Claude Code, um servidor sem login mostra só os tools `authenticate` e `complete_authentication` no lugar dos tools do CRM. Isso também quer dizer que falta o login. A conexão vence depois de 90 dias. Nesse caso, o vendedor faz o login de novo.
 
@@ -34,14 +34,14 @@ Descubra qual app o vendedor usa e siga a linha dele:
 | Codex | Siga [No Codex](#no-codex) |
 | claude.ai ou Claude Desktop | Guie o vendedor pelos passos de [Claude.ai e Claude Desktop](instalacao.md#claudeai-e-claude-desktop). A configuração é só pela tela, e você não clica por ele |
 | ChatGPT | Guie o vendedor pelos passos de [ChatGPT](instalacao.md#chatgpt-não-testado). Avise que ninguém testou essa conexão ainda e peça que ele conte o resultado |
-| Cursor ou outro app | Não configure. Diga ao vendedor que o CRM só aceita os apps de [Apps aceitos](instalacao.md#apps-aceitos) |
+| Cursor ou outro app | Não configure. Diga ao vendedor que o CRM recusa o login desse app, como em [Situação por app](instalacao.md#situação-por-app) |
 
 Em todos os apps, o vendedor faz o login no CRM e clica em permitir. Você não faz esse passo e não pede a senha dele. A configuração está pronta quando `minha_agenda` devolve dados do CRM.
 
 ### No Claude Code
 
 1. Rode os dois `curl` de [Confira se o servidor responde](instalacao.md#confira-se-o-servidor-responde). Os dois devolvem JSON. Se um deles falhar, pare e avise o vendedor que o servidor não respondeu.
-2. Rode `claude mcp list`. Se `crm-profills` aparece com `✔ Connected`, pule para o passo 6. Se aparece com outra URL, rode `claude mcp remove crm-profills`.
+2. Rode `claude mcp list`. Se `crm-profills` aparece com `✔ Connected`, pule para o passo 7. Se aparece com a URL `https://mcp.profills.com/mcp` e `! Needs authentication`, pule para o passo 4: um segundo `add` falha com "already exists". Se aparece com outra URL, rode `claude mcp remove crm-profills`.
 3. Rode `claude mcp add --transport http --scope user crm-profills https://mcp.profills.com/mcp`. Rode `claude mcp list` de novo. O servidor aparece como `! Needs authentication`.
 4. Inicie o login. O login precisa de um terminal interativo e de uma pessoa no navegador.
    - Numa sessão interativa do Claude Code, peça ao vendedor que digite `/mcp` e escolha `crm-profills`.
@@ -53,12 +53,12 @@ Em todos os apps, o vendedor faz o login no CRM e clica em permitir. Você não 
 
 ### No Codex
 
-O Codex funciona depois da liberação do Codex no CRM. Antes dela, o login para numa página do CRM com "Não foi possível conectar". Se o vendedor vir essa página, avise que o Codex ainda não foi liberado e pare.
+Ninguém conectou o Codex ainda. Avise o vendedor e peça que ele conte o resultado. O Codex só conecta depois que o CRM põe o Codex na lista de apps aceitos. Antes disso, o login para numa página do CRM com "Não foi possível conectar". Se o vendedor vir essa página, avise que o CRM ainda não aceita o Codex e pare.
 
 1. Rode os dois `curl` de [Confira se o servidor responde](instalacao.md#confira-se-o-servidor-responde). Se um deles falhar, pare e avise o vendedor.
-2. Rode `codex mcp list`. Se `crm-profills` aparece sem `Not logged in`, pule para o passo 5.
-3. Peça ao vendedor que rode no terminal dele `codex mcp add crm-profills --url https://mcp.profills.com/mcp`. Não rode esse comando você mesmo. O `add` abre o login e só termina quando o navegador volta, então ele trava numa sessão sem terminal interativo. Se o servidor já existe e só falta o login, o comando é `codex mcp login crm-profills`. Numa máquina sem navegador, o vendedor usa `codex mcp login --no-browser crm-profills` como em [Codex](instalacao.md#codex).
-4. Peça ao vendedor que faça o login no CRM e clique em permitir.
+2. Rode `codex mcp list`. Se `crm-profills` aparece com a URL `https://mcp.profills.com/mcp` e sem `Not logged in`, pule para o passo 5. Se aparece com `Not logged in`, peça ao vendedor que rode `codex mcp login crm-profills` e siga no passo 4. Se aparece com outra URL, rode `codex mcp remove crm-profills`.
+3. Peça ao vendedor que rode no terminal dele `codex mcp add crm-profills --url https://mcp.profills.com/mcp`. Não rode esse comando você mesmo. O `add` abre o login e só termina quando o navegador volta, então ele trava numa sessão sem terminal interativo. Numa máquina sem navegador, o `add` fica parado sem mostrar nada. O vendedor interrompe com Ctrl+C, porque o servidor já ficou gravado, e roda `codex mcp login --no-browser crm-profills` como em [Codex](instalacao.md#codex).
+4. Peça ao vendedor que faça o login no CRM e clique em permitir. A tela de consentimento deve mostrar o aviso de app que roda no computador dele, como no Claude Code.
 5. Confira a conexão como em [Confira a conexão](#confira-a-conexão). Se os tools do CRM não aparecem na sua sessão, peça ao vendedor que abra uma sessão nova.
 
 ## Qual tool chamar
@@ -133,12 +133,15 @@ Quando o tool diz que a escrita pode ter sido gravada, chame a leitura desta tab
 
 | Tool de escrita | Leitura | Como reconhecer o registro |
 |---|---|---|
-| `registrar_atendimento`, `editar_atendimento`, `excluir_atendimento` | `ver_cliente` ou `listar_atendimentos` | Mesmo `assunto`, com `data` de agora e o vendedor como `autor` |
-| `criar_compromisso`, `editar_compromisso`, `excluir_compromisso` | `minha_agenda` com `de` no dia do início | Mesmo `titulo` e mesmo `inicio` |
-| `criar_contato`, `editar_contato` | `ver_cliente`, na lista `contatos` | Mesmo `nome` e mesmo `telefone` |
+| `registrar_atendimento` | `ver_cliente` ou `listar_atendimentos` | Mesmo `assunto`, com `data` de agora e o vendedor como `autor` |
+| `criar_compromisso` | `minha_agenda` com `de` no dia do início | Mesmo `titulo` e mesmo `inicio` |
+| `criar_contato` | `ver_cliente`, na lista `contatos` | Mesmo `nome` e mesmo `telefone` |
+| `editar_atendimento`, `excluir_atendimento` | `ver_cliente` ou `listar_atendimentos` | Pelo `id` enviado. Na edição, o registro traz os campos alterados |
+| `editar_compromisso`, `excluir_compromisso` | `minha_agenda` com `de` no dia do início, o novo se a edição mudou o `inicio` | Pelo `id` enviado. Na edição, o registro traz os campos alterados |
+| `editar_contato` | `ver_cliente`, na lista `contatos` | Pelo `id` enviado, com os campos alterados |
 | `enviar_proposta` | `ver_proposta` com o `proposta_id` | `estagio` igual ao `destino` do envio |
 
-Na exclusão, vale o contrário. O registro ausente da leitura confirma que a exclusão aconteceu. Nas outras escritas, se o registro está lá, diga ao vendedor que a escrita foi gravada. Se não está, repita a escrita uma vez e diga o resultado. Não repita um `registrar_atendimento`, `criar_compromisso` ou `criar_contato` sem conferir. Cada chamada do tool conta como um pedido novo, então a segunda chamada grava um registro a mais.
+Na exclusão, vale o contrário. O `id` ausente da leitura confirma que a exclusão aconteceu. Nas outras escritas, se a leitura mostra a escrita, diga ao vendedor que ela foi gravada. Se não mostra, repita a escrita uma vez e diga o resultado. Não repita um `registrar_atendimento`, `criar_compromisso` ou `criar_contato` sem conferir. Cada chamada do tool conta como um pedido novo, então a segunda chamada grava um registro a mais.
 
 ## Paginação
 
@@ -195,6 +198,7 @@ O número que o vendedor fala (0072/26, 72) é o `codigo` da proposta, não o `p
 | Em `enviar_proposta`, "Esta versão da proposta não é a ativa, e só a versão ativa é enviada. Nada foi gravado. ..." | Abra a proposta pelo `codigo` com `ver_proposta`. Se a resposta tem `ativa` igual a 1, confirme com o vendedor e envie com o `id` dela. Se não tem, avise o vendedor e não envie |
 | Em `enviar_proposta`, mensagem que começa com "Nada foi gravado" | A proposta já está no destino ou num estágio que não permite o envio. Leia a proposta de novo com `ver_proposta`, diga o estágio ao vendedor e confirme com ele antes de outro envio |
 | "O CRM está indisponível agora. Tente de novo em alguns segundos." | Espere alguns segundos e chame de novo uma vez. Se voltar a mesma mensagem, avise o vendedor e pare |
+| "O CRM limitou as chamadas e recusou este pedido sem executá-lo. Espere ... antes de tentar de novo. ..." | O CRM recebeu chamadas demais em pouco tempo e não executou este pedido. Numa escrita, nada foi gravado. Espere o tempo da mensagem e chame de novo uma vez. Não repita antes disso. Se o pedido era uma lista longa, avise o vendedor que o resto vem depois da espera |
 | Qualquer mensagem com "Avise o administrador." | Avise o vendedor. Chamar de novo não resolve |
 | "Sessão sem usuário do CRM. Reconecte o conector." | Peça ao vendedor que conecte de novo |
 

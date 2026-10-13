@@ -2,7 +2,9 @@
 
 ![Fichas de cliente, proposta, agenda e gráfico ligadas a um núcleo central](docs/img/capa.png)
 
-Este conector liga o app de IA do vendedor ao CRM da Profills. Com ele, o agente busca clientes, lê propostas, agenda e o placar de Desempenho, registra atendimentos, compromissos e contatos e manda propostas para aprovação ou para `enviada`. Tudo acontece em nome do vendedor que fez login, com as mesmas permissões que ele tem na tela do CRM.
+Este conector MCP liga o app de IA do vendedor ao CRM da Profills. MCP é o protocolo que o Claude, o Codex e outros apps usam para chamar serviços de fora. O conector só serve a quem tem conta ativa no CRM da Profills.
+
+Com ele, o agente busca clientes, lê propostas, agenda e o placar de Desempenho, registra atendimentos, compromissos e contatos, manda propostas para aprovação e marca propostas como enviadas. Tudo acontece em nome do vendedor que fez login, com as mesmas permissões que ele tem na tela do CRM.
 
 **Agente: comece por [docs/guia-para-agentes.md](docs/guia-para-agentes.md).**
 
@@ -29,7 +31,7 @@ O endereço do conector é `https://mcp.profills.com/mcp`. O vendedor faz o logi
 |---|---|---|
 | Claude (claude.ai e Claude Desktop) | Funciona | **Customize**, **Connectors** e **Add custom connector** com a URL acima. [Passo a passo](docs/instalacao.md#claudeai-e-claude-desktop) |
 | Claude Code | Funciona | `claude mcp add --transport http --scope user crm-profills https://mcp.profills.com/mcp` e depois `/mcp`. [Passo a passo](docs/instalacao.md#claude-code) |
-| Codex | Funciona depois da liberação do Codex no CRM | `codex mcp add crm-profills --url https://mcp.profills.com/mcp`, que já abre o login. [Passo a passo](docs/instalacao.md#codex) |
+| Codex | Provável, ainda não testado. Só conecta depois que o CRM puser o Codex na lista de apps aceitos | `codex mcp add crm-profills --url https://mcp.profills.com/mcp`, que já abre o login. [Passo a passo](docs/instalacao.md#codex) |
 | ChatGPT | Provável, ainda não testado | Developer mode e **Create app** com a URL acima. [Passo a passo](docs/instalacao.md#chatgpt-não-testado) |
 | Cursor | Não funciona hoje | O Cursor não está na lista de apps aceitos do CRM. [Detalhes](docs/instalacao.md#cursor-não-funciona-hoje) |
 

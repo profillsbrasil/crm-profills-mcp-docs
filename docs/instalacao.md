@@ -1,8 +1,10 @@
 # Instalação
 
-Esta página é para o vendedor ou o gestor que quer usar o CRM da Profills pelo app de IA. O endereço do conector é `https://mcp.profills.com/mcp`.
+Esta página é para o vendedor ou o gestor que quer usar o CRM da Profills pelo app de IA. O conector só serve a quem tem conta ativa no CRM da Profills. O endereço do conector é `https://mcp.profills.com/mcp`.
 
-- [Apps aceitos](#apps-aceitos)
+Para conectar, vá direto à seção do seu app. A tabela de situação e os comandos `curl` servem para conferir o servidor e são opcionais.
+
+- [Situação por app](#situação-por-app)
 - [Confira se o servidor responde](#confira-se-o-servidor-responde)
 - [Claude.ai e Claude Desktop](#claudeai-e-claude-desktop)
 - [Claude Code](#claude-code)
@@ -13,15 +15,15 @@ Esta página é para o vendedor ou o gestor que quer usar o CRM da Profills pelo
 - [O que a tela de consentimento mostra](#o-que-a-tela-de-consentimento-mostra)
 - [Como o login funciona](#como-o-login-funciona)
 
-## Apps aceitos
+## Situação por app
 
-O CRM só aceita o login dos apps de uma lista fixa. Cada app se identifica por um endereço público de metadados (CIMD):
+O CRM só aceita o login dos apps de uma lista fixa. Cada app se identifica por um endereço público de metadados (CIMD). O Cursor não tem esse endereço e fica fora da lista.
 
 | App | Endereço CIMD | Situação |
 |---|---|---|
 | Claude (claude.ai e Claude Desktop) | `https://claude.ai/oauth/mcp-oauth-client-metadata` | Funciona |
 | Claude Code | `https://claude.ai/oauth/claude-code-client-metadata` | Funciona |
-| Codex | `https://chatgpt.com/oauth/codex/client.json` | Funciona depois da liberação do Codex no CRM |
+| Codex | `https://chatgpt.com/oauth/codex/client.json` | Provável, ainda não testado. Só conecta depois que o CRM puser o Codex na lista |
 | ChatGPT | `https://chatgpt.com/oauth/client.json` | Provável, ainda não testado |
 | Cursor | nenhum | Não funciona hoje |
 
@@ -31,7 +33,7 @@ Em todos os apps, duas etapas são só do vendedor. Ele entra no CRM com a próp
 
 ## Confira se o servidor responde
 
-Rode os dois comandos abaixo. Os dois respondem sem login.
+Este passo é opcional para o vendedor. O agente usa estes comandos antes de configurar o conector. Os dois respondem sem login.
 
 ```bash
 curl -s https://mcp.profills.com/.well-known/oauth-protected-resource/mcp
@@ -55,11 +57,11 @@ No Pro e no Max, o próprio vendedor adiciona o conector. Os nomes dos menus aba
 2. Clique em **+ Add** e depois em **Add custom connector**.
 3. Dê um nome, como `CRM Profills`, preencha a URL `https://mcp.profills.com/mcp` e clique em **Continue**.
 4. O Claude mostra a autenticação que detectou no servidor. Não mude nada e clique em **Continue**.
-5. Em **Authentication**, escolha **Sign in now** ou **Sign in when needed**. Sem login, o servidor recusa toda chamada, e a opção **OAuth client** do passo 6 some da tela.
+5. Em **Authentication**, escolha **Sign in now** ou **Sign in when needed**. Não escolha **No sign in**. Sem login, o servidor recusa toda chamada, e a opção **OAuth client** do passo 6 some da tela.
 6. Em **OAuth client**, escolha **Use Claude's published identity (Recommended)**. As outras duas opções não funcionam, porque o CRM não aceita registro automático nem client próprio.
 7. Deixe **Request headers** vazio. O login já identifica o vendedor.
 8. Clique em **Add**.
-9. Faça o login no CRM. Se o navegador não abrir sozinho, clique em **Connect** no conector, na lista de **Connectors**.
+9. Faça o login no CRM. Se o navegador não abrir sozinho, clique em **Connect** no conector, na lista de **Connectors**. A página de suporte só descreve o **Connect** no Team e no Enterprise, então esse botão no Pro e no Max não está confirmado. Se ele não aparecer, remova o conector e adicione de novo.
 10. Entre com a sua conta do CRM e clique em permitir na tela de consentimento.
 
 O Claude volta para a conversa com o conector ligado. Para testar, peça "Mostre a minha agenda desta semana". O conector está pronto quando a resposta traz compromissos ou diz que a agenda está vazia.
@@ -76,7 +78,7 @@ Os comandos abaixo foram conferidos na [documentação de MCP do Claude Code](ht
    claude mcp list
    ```
 
-   Se `crm-profills` aparece com `✔ Connected`, o conector já funciona. Pule para o passo 6. Se aparece com outra URL, remova antes com `claude mcp remove crm-profills`. O `remove` também apaga o login guardado desse servidor.
+   Se `crm-profills` aparece com `✔ Connected`, o conector já funciona. Pule para o passo 6. Se aparece com a URL `https://mcp.profills.com/mcp` e `! Needs authentication`, falta só o login. Pule para o passo 3, porque um segundo `add` falha com "already exists". Se aparece com outra URL, remova antes com `claude mcp remove crm-profills`. O `remove` também apaga o login guardado desse servidor.
 
 2. Adicione o servidor para todos os projetos:
 
@@ -108,31 +110,39 @@ No modo não interativo (`claude -p`), o Claude Code não faz o login. Faça o l
 
 ## Codex
 
-O Codex funciona depois da liberação do Codex no CRM. Antes dela, o login para numa página do CRM com "Não foi possível conectar". Os comandos abaixo foram conferidos no `codex mcp --help` da versão 0.162.1.
+Ninguém conectou o Codex ainda. O Codex só conecta depois que o CRM põe o endereço `https://chatgpt.com/oauth/codex/client.json` na lista de apps aceitos. Antes disso, o login para numa página do CRM com "Não foi possível conectar". Os comandos abaixo foram conferidos no `codex mcp --help` da versão 0.162.1.
 
-1. Adicione o servidor:
+1. Veja se o servidor já está configurado:
+
+   ```bash
+   codex mcp list
+   ```
+
+   Se `crm-profills` aparece com a URL `https://mcp.profills.com/mcp` e sem `Not logged in`, o conector já funciona. Pule para o passo 5. Se aparece com `Not logged in`, pule para o passo 3. Se aparece com outra URL, remova antes com `codex mcp remove crm-profills`.
+
+2. Adicione o servidor:
 
    ```bash
    codex mcp add crm-profills --url https://mcp.profills.com/mcp
    ```
 
-   O `add` grava o servidor em `~/.codex/config.toml` e já abre o login no navegador. O comando só termina quando o login volta do navegador. Rode o `add` num terminal interativo.
+   O `add` grava o servidor em `~/.codex/config.toml` e já abre o login no navegador. O comando fica parado até o login terminar. Rode o `add` num terminal interativo. Se o login terminar aqui, pule para o passo 4.
 
-2. Entre com a sua conta do CRM e clique em permitir na tela de consentimento.
+   Sem navegador na máquina, como numa sessão SSH, o `add` fica parado sem mostrar nada. Interrompa com Ctrl+C. O servidor já ficou gravado, e o login segue no passo 3.
 
-3. Confira com `codex mcp list`. Se o servidor aparece como `Not logged in`, o login não terminou. Rode `codex mcp login crm-profills` e repita o passo 2.
+3. Faça o login, se o `add` não fez:
 
-4. Abra o Codex e peça "Mostre a minha agenda desta semana". O agente chama `minha_agenda` e lista os compromissos.
+   ```bash
+   codex mcp login crm-profills
+   ```
 
-Para fazer o login de novo, rode `codex mcp login crm-profills`.
+   Sem navegador na máquina, use `codex mcp login --no-browser crm-profills`. O comando imprime a URL de login. Abra a URL no seu computador e faça o login. O navegador volta para um endereço `http://127.0.0.1:<porta>/callback`, que não abre no seu computador. Copie a URL inteira da barra de endereço e cole no terminal. Esse passo também pede um terminal interativo.
 
-Sem navegador na máquina, como numa sessão SSH, rode o login assim:
+4. Entre com a sua conta do CRM e clique em permitir na tela de consentimento. O Codex recebe o login num endereço local, como o Claude Code, então a tela deve mostrar o mesmo aviso: "O app roda no seu computador (...)". Esse aviso não foi conferido com o Codex. Se foi você quem abriu a conexão, clique em permitir.
 
-```bash
-codex mcp login --no-browser crm-profills
-```
+5. Confira com `codex mcp list`. O servidor aparece sem `Not logged in`. Abra o Codex e peça "Mostre a minha agenda desta semana". O agente chama `minha_agenda` e lista os compromissos.
 
-O comando imprime a URL de login. Abra a URL no seu computador e faça o login. O navegador volta para um endereço `http://127.0.0.1:<porta>/callback`, que não abre no seu computador. Copie a URL inteira da barra de endereço e cole no terminal. Esse passo também pede um terminal interativo.
+Para fazer o login de novo, rode `codex mcp login crm-profills`. Para desconectar, rode `codex mcp logout crm-profills`. As escritas feitas pelo Codex aparecem no CRM com o selo "via Codex".
 
 ## ChatGPT (não testado)
 
@@ -142,7 +152,7 @@ Ninguém conectou o ChatGPT ainda. Os passos abaixo vêm de um resumo da documen
 2. Clique em **Create app**, ao lado de **Advanced settings**. Preencha a URL `https://mcp.profills.com/mcp` e escolha autenticação OAuth.
 3. O app novo aparece em **Drafts**. Conecte, entre com a conta do CRM e clique em permitir.
 
-O developer mode existe nos planos Pro, Plus, Business, Enterprise e Education, na web. No Business e no Enterprise, o admin liga o developer mode no painel de administração.
+O developer mode existe nos planos Pro, Plus, Business, Enterprise e Education, na web. No Business e no Enterprise, o admin liga o developer mode no painel de administração. Guias de terceiros dizem que a escrita pelo app só funciona no Business, no Enterprise e no Education. Isso não está confirmado. No Plus ou no Pro, o agente pode ler e não conseguir gravar.
 
 Se o login falhar, avise o administrador do CRM e conte em que passo parou.
 
@@ -152,7 +162,7 @@ O Cursor não está na lista de apps aceitos do CRM, e o CRM recusa o login dele
 
 ## Outros apps
 
-O CRM recusa o login de qualquer app fora da lista de [Apps aceitos](#apps-aceitos). O MCP Inspector e outros clientes MCP que dependem de registro automático caem nesse caso.
+O CRM recusa o login de qualquer app fora da lista de [Situação por app](#situação-por-app). O MCP Inspector e outros clientes MCP que dependem de registro automático caem nesse caso.
 
 ## O que a tela de consentimento mostra
 
@@ -160,6 +170,8 @@ A tela tem o título "Conectar" seguido do nome do app. Logo abaixo vem o texto 
 
 - "Ler clientes, propostas, agenda e Desempenho que você já vê no CRM."
 - "Registrar, editar e excluir os seus atendimentos e compromissos, com as regras da tela."
+
+O bloco não cita tudo o que o agente faz. Com o mesmo acesso, o agente também cria e edita contatos e manda propostas para aprovação ou marca a proposta como enviada.
 
 Uma conta inativa ou em análise recebe uma página de erro no lugar da tela de consentimento.
 
@@ -205,4 +217,4 @@ Prazos do login:
 | Refresh token, renovado a cada uso | 30 dias |
 | Conexão inteira, contada a partir do primeiro login | 90 dias |
 
-O app renova o acesso sozinho. Depois de 90 dias, o vendedor conecta de novo. Se o mesmo refresh token for usado duas vezes com mais de 30 segundos entre os usos, o CRM derruba a conexão, e o vendedor também conecta de novo.
+O app renova o acesso sozinho. Depois de 90 dias, o vendedor conecta de novo. Se a conexão cair antes disso, o vendedor também conecta de novo.
