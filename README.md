@@ -37,14 +37,14 @@ No app (claude.ai ou Claude Desktop): **Customize**, **Connectors** e **Add cust
 
 1. Rode `claude mcp list`.
 2. Procure a linha `claude.ai CRM Profills: https://mcp.profills.com/mcp - ✔ Connected`. O nome depois de `claude.ai` é o que você deu ao conector.
-3. Com essa linha, o CRM já funciona no Claude Code. Não instale o plugin nem rode `claude mcp add`, senão o agente recebe cada tool do CRM duas vezes.
+3. Com essa linha, o CRM já funciona no Claude Code. Não instale o plugin nem rode `claude mcp add`, porque o conector já é o servidor do CRM no Claude Code.
 
 </details>
 
 <details>
 <summary>Passo a passo: plugin no Claude Code</summary>
 
-1. Rode `claude mcp list`. Se o CRM já aparece, com qualquer nome e a URL `https://mcp.profills.com/mcp`, não instale de novo. Com `! Needs authentication`, falta só o login: pule para o passo 4.
+1. Rode `claude mcp list`. Se o CRM já aparece, com qualquer nome e a URL `https://mcp.profills.com/mcp`, não instale de novo. Com `! Needs authentication`, falta só o login. Pule para o passo 4.
 2. Adicione o marketplace da Profills:
 
    ```bash
@@ -105,7 +105,7 @@ No app: **Developer mode** e **Create app** com o endereço.
 <details>
 <summary>Passo a passo: plugin no Codex</summary>
 
-1. Rode `codex mcp list`. Se o CRM já aparece, com qualquer nome e a URL `https://mcp.profills.com/mcp`, não instale de novo. Com `Not logged in`, falta só o login: pule para o passo 4.
+1. Rode `codex mcp list`. Se o CRM já aparece, com qualquer nome e a URL `https://mcp.profills.com/mcp`, não instale de novo. Com `Not logged in`, falta só o login. Pule para o passo 4.
 2. Adicione o marketplace da Profills:
 
    ```bash
