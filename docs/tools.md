@@ -125,7 +125,7 @@ Cada item traz `prazo_retorno`, o dia em que vencem os 30 dias do envio. Ele só
 | `uf` | | 2 letras, como `PR` |
 | `cursor`, `limite` | | Paginação por `proximo_cursor` |
 
-Com `ultimo_atendimento_aproximado: true`, a data é antiga e o CRM só garante que o atendimento foi nesse dia ou antes. Diga ao vendedor "em tal dia ou antes".
+Com `ultimo_atendimento_aproximado: true`, a data é anterior a 03/07/2026 e o CRM só garante que o atendimento foi nesse dia ou antes. Diga ao vendedor "em tal dia ou antes".
 
 A carteira mede atendimento, não visita. `ultimo_atendimento_em` é o último atendimento registrado no cliente, de qualquer autor. Um compromisso de visita na agenda não conta. Quando o vendedor pergunta por "visita", diga que a lista é de clientes sem atendimento registrado.
 
