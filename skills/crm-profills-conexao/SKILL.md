@@ -14,15 +14,15 @@ Rode `claude mcp list` no Claude Code ou `codex mcp list` no Codex. Anote cada l
 | Nome na lista | Origem |
 |---|---|
 | `claude.ai CRM Profills`, ou `claude.ai` mais o nome que o vendedor deu | Conector da conta no claude.ai. Vale também no claude.ai e no Claude Desktop |
-| `plugin:crm-profills:crm-profills` | Este plugin, no Claude Code |
+| `plugin:crm-profills:crm-profills` | Este plugin no Claude Code, vindo da conta do claude.ai (`crm-profills@synced` no `claude plugin list`) ou do `claude plugin install` |
 | `crm-profills` no Codex | Este plugin, ou um `codex mcp add` com o mesmo nome |
 | Outro nome | Servidor adicionado à mão com `claude mcp add` ou `codex mcp add` |
 
-O Claude Code tira da lista o servidor do plugin quando um servidor manual tem a mesma URL. Com o plugin instalado e só a linha do manual na lista, o manual é o que está em uso.
+No Claude Code, a ordem é servidor manual, depois plugin, depois conector do claude.ai, e só o primeiro aparece. Com o plugin instalado, a linha do conector do claude.ai some e o plugin pede um login próprio: isso é esperado, não é falha. Com um servidor manual de mesma URL, a linha do plugin some e o manual é o que está em uso.
 
 ## 2. Resolva pelo estado
 
-Com uma linha só, siga o estado dela. Com duas ou mais, resolva a duplicata primeiro.
+Com uma linha só, siga o estado dela. Com um servidor manual ou um plugin instalado duas vezes, resolva isso primeiro.
 
 - **`✔ Connected`, ou Codex sem `Not logged in`.** A conexão funciona. Prove com `minha_agenda` sem parâmetros, que só lê. Uma lista de compromissos ou uma lista vazia confirmam.
 - **`! Needs authentication`, `Not logged in`, só os tools `authenticate` e `complete_authentication`, ou a mensagem "Sessão sem usuário do CRM. Reconecte o conector."** Falta o login, ou a conexão venceu (ela dura 90 dias). Refaça só o login, sem adicionar o servidor de novo:
@@ -30,13 +30,10 @@ Com uma linha só, siga o estado dela. Com duas ou mais, resolva a duplicata pri
   - Claude Code fora dela, como no `claude -p`: o vendedor roda `claude mcp login "<nome da lista>"` no terminal dele.
   - Codex: o vendedor roda `codex mcp login <nome da lista>`.
   - Máquina sem navegador, como numa sessão SSH: o mesmo comando com `--no-browser` num terminal interativo (`ssh -t`). O vendedor abre a URL impressa no computador dele e cola no terminal a URL para onde o navegador voltou.
-  - Conector do claude.ai: o vendedor clica em **Connect** no conector, em **Customize** e **Connectors**.
-- **Nenhuma linha.** Instale o plugin e depois siga a linha do login.
-  - Claude Code: `claude plugin marketplace add profillsbrasil/profills-skills` e `claude plugin install crm-profills@profills-skills`.
-  - Codex: `codex plugin marketplace add profillsbrasil/profills-skills` e `codex plugin add crm-profills@profills-skills`.
-- **Duas linhas ou mais com a mesma URL.** O agente recebe cada tool do CRM duas vezes. Fica uma linha só. Diga ao vendedor qual remover, nesta ordem:
-  1. Com o conector do claude.ai na lista, ele fica, porque já cobre o claude.ai, o Claude Desktop e o Claude Code. Sai o plugin (`claude plugin uninstall crm-profills@profills-skills`) e sai o servidor manual.
-  2. Sem o conector, fica o plugin. Sai o servidor manual com `claude mcp remove <nome>` ou `codex mcp remove <nome>`.
+  - claude.ai: o vendedor clica em **Conectar** no CRM Profills, na aba **Conectores** do plugin (em inglês, **Connect** e **Connectors**).
+- **Nenhuma linha.** O CRM não está instalado. Siga [INSTALAR.md](../../INSTALAR.md).
+- **Servidor manual na lista.** Um nome fora da tabela, com a URL do CRM, vem de um `claude mcp add` ou `codex mcp add` antigo. Fica o plugin. Diga ao vendedor que remova o manual com `claude mcp remove <nome>` ou `codex mcp remove <nome>`, e siga o login do plugin.
+- **Plugin instalado duas vezes no Claude Code.** O `claude plugin list` mostra `crm-profills@synced` e `crm-profills@profills-skills`. Fica o da conta, que vale também no claude.ai e no Desktop. Sai o outro com `claude plugin uninstall crm-profills@profills-skills`.
 - **Outro estado, como falha ao conectar.** O servidor não respondeu. Avise o vendedor e pare.
 
 Depois de um login ou de uma remoção, se os tools do CRM não aparecem na sessão aberta, peça ao vendedor que abra uma sessão nova. A conexão está pronta quando `minha_agenda` devolve dados do CRM.

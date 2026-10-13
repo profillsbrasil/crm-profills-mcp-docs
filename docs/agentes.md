@@ -1,6 +1,6 @@
 # Guia para agentes
 
-Esta página é para você, agente no Claude Code, no Codex, no claude.ai ou no ChatGPT, que usa o CRM da Profills pelo vendedor. A descrição e os parâmetros de cada tool estão em [tools.md](tools.md). A instalação está no [README](../README.md#instalar).
+Esta página é para você, agente no Claude Code, no Codex, no claude.ai ou no ChatGPT, que usa o CRM da Profills pelo vendedor. A descrição e os parâmetros de cada tool estão em [tools.md](tools.md). A instalação está em [INSTALAR.md](../INSTALAR.md).
 
 ## O que fazer, em ordem
 
@@ -22,7 +22,7 @@ Chame `minha_agenda` sem parâmetros. Ela devolve os compromissos do vendedor de
 | "Sessão sem usuário do CRM. Reconecte o conector." | O login não traz um vendedor válido | Peça ao vendedor que faça o login de novo |
 | "Seu usuário não tem acesso ao CRM agora." | A conta do vendedor está sem acesso ao CRM | Avise o vendedor e pare |
 | Mensagem com "Avise o administrador." | O CRM recusou ou falhou o pedido por um motivo que só o administrador resolve | Avise o vendedor que o administrador precisa olhar |
-| Os tools do CRM faltam, aparecem duas vezes, ou só aparecem `authenticate` e `complete_authentication` | Falta o login, a conexão venceu, ou há servidor duplicado | No Claude Code e no Codex, siga a skill [crm-profills-conexao](../skills/crm-profills-conexao/SKILL.md). No claude.ai, peça ao vendedor que clique em **Connect** no conector, em **Customize** e **Connectors**. No app do ChatGPT, guie o vendedor pelo [passo a passo do app](../README.md#instalar) |
+| Os tools do CRM faltam, aparecem duas vezes, ou só aparecem `authenticate` e `complete_authentication` | Falta o login, a conexão venceu, ou há servidor duplicado | No Claude Code e no Codex, siga a skill [crm-profills-conexao](../skills/crm-profills-conexao/SKILL.md). No claude.ai, peça ao vendedor que clique em **Conectar** no CRM Profills, na aba **Conectores** do plugin. Se o CRM nunca foi instalado, siga [INSTALAR.md](../INSTALAR.md) |
 
 O login no CRM e o clique em permitir são sempre do vendedor. Você não faz esse passo e não pede a senha dele. A conexão vence depois de 90 dias. Nesse caso, o vendedor faz o login de novo.
 
@@ -350,4 +350,4 @@ O app renova o acesso sozinho por até 90 dias. Depois, o vendedor faz o login d
 
 ### Funciona no ChatGPT?
 
-O CRM aceita o login do Codex e do app do ChatGPT. Os passos estão no bloco ChatGPT de [Instalar](../README.md#instalar).
+Pelo Codex, sim. No chat do ChatGPT, os planos Plus e Pro não gravam por servidor próprio. Os passos estão em [INSTALAR.md](../INSTALAR.md#codex).
