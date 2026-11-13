@@ -38,7 +38,7 @@ Com uma linha só, siga o estado dela. Com um servidor manual ou um plugin insta
 
 Depois de um login ou de uma remoção, se os tools do CRM não aparecem na sessão aberta, peça ao vendedor que abra uma sessão nova. A conexão está pronta quando `minha_agenda` devolve dados do CRM.
 
-Um app fora do Claude e do ChatGPT recebe do CRM a página "Não foi possível conectar". Diga ao vendedor que o CRM só aceita o login do Claude e do ChatGPT.
+Um app fora do Claude, do ChatGPT e da Secretária Profills recebe do CRM a página "Não foi possível conectar". Diga ao vendedor que o CRM só aceita o login desses apps.
 
 ## Depois da conexão
 
