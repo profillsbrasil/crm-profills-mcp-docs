@@ -384,8 +384,10 @@ gerado com a proposta `aprovada` sai com marca de rascunho; depois do envio, o `
 abre a proposta na tela, onde o PDF sai sem a marca.
 
 Use o `id` da versão com `ativa` 1 lido por `ver_proposta` neste turno. Antes de chamar, confirme com
-o vendedor o código, o cliente e o envio. Nada é gravado quando a versão não é a ativa ou quando a
-proposta não está no estágio de origem do envio; o erro de estágio diz o estágio atual.
+o vendedor o código, o cliente e o envio. O app que mostra formulário pede a confirmação a ele de
+novo na hora; se ele não confirmar, o tool responde erro e nada é gravado. Nada é gravado quando a
+versão não é a ativa ou quando a proposta não está no estágio de origem do envio; o erro de estágio
+diz o estágio atual.
 
 A resposta traz `id`, `codigo`, `versao`, `estagio`, `data_envio`, `cliente` com
 `id` e `nome` e o `link`; diga ao vendedor qual proposta de qual cliente foi enviada.
@@ -400,9 +402,10 @@ A resposta traz `id`, `codigo`, `versao`, `estagio`, `data_envio`, `cliente` com
 Nome no app: Excluir atendimento. Tipo: altera.
 
 Exclui um atendimento, com a regra da tela. Confirme com o vendedor antes. A exclusão não se
-desfaz. A resposta traz o atendimento excluído, com `excluido: true`; recriar por
-`registrar_atendimento` gera um atendimento novo, com a data de agora e o vendedor conectado como
-autor. Excluir de novo responde não encontrado.
+desfaz. O app que mostra formulário pede a confirmação a ele de novo na hora; se ele não
+confirmar, o tool responde erro e nada é gravado. A resposta traz o atendimento excluído, com
+`excluido: true`; recriar por `registrar_atendimento` gera um atendimento novo, com a data de
+agora e o vendedor conectado como autor. Excluir de novo responde não encontrado.
 
 | Parâmetro | Obrigatório | Valores aceitos | Descrição |
 |---|---|---|---|
@@ -413,9 +416,10 @@ autor. Excluir de novo responde não encontrado.
 Nome no app: Excluir compromisso. Tipo: altera.
 
 Exclui um compromisso da agenda do próprio vendedor. Confirme com o vendedor antes. A exclusão
-não se desfaz. A resposta traz o compromisso excluído, com `excluido: true`; recriar por
-`criar_compromisso` gera um compromisso novo, e a cor volta à do tipo. Excluir de novo responde
-não encontrado.
+não se desfaz. O app que mostra formulário pede a confirmação a ele de novo na hora; se ele não
+confirmar, o tool responde erro e nada é gravado. A resposta traz o compromisso excluído, com
+`excluido: true`; recriar por `criar_compromisso` gera um compromisso novo, e a cor volta à do
+tipo. Excluir de novo responde não encontrado.
 
 | Parâmetro | Obrigatório | Valores aceitos | Descrição |
 |---|---|---|---|
