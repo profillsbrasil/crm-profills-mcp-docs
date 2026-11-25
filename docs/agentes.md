@@ -207,6 +207,7 @@ O número que o vendedor fala (0072/26, 72) é o `codigo` da proposta, não o `p
 | "Seu usuário não tem acesso ao relatório de Desempenho no CRM." | Diga ao vendedor e não tente outro escopo |
 | "Seu usuário não vê esse escopo no relatório de Desempenho..." | Chame `ver_desempenho` sem `escopo` e use um dos `escopos_disponiveis` |
 | "O vendedor vê este registro, mas não tem permissão para alterá-lo no CRM. Nada foi gravado." | Avise o vendedor e pare. Nada mudou no CRM, e repetir dá o mesmo erro |
+| "O vendedor não confirmou. Nada foi gravado. Não repita o pedido sem ele pedir de novo." | O vendedor recusou ou fechou o formulário de confirmação que o app mostrou ao excluir ou ao enviar proposta. Diga que nada mudou e pare |
 | "O CRM recusou o campo `...`." | Corrija o campo citado, dentro do limite que a mensagem dá, e chame de novo |
 | "O CRM não confirmou a escrita, e ela pode ter sido gravada. Confira com ... antes de repetir." | Chame a leitura da tabela [Confira uma escrita incerta](#confira-uma-escrita-incerta). Repita a escrita só se o registro não estiver lá |
 | "Não encontrado, ou você não tem acesso a este registro. Se a primeira tentativa gravou, o registro pode ter sido removido depois. Confira com ... antes de repetir." | Faça como na linha anterior. Confira antes de repetir |
